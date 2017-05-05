@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.data.model.User;
 
@@ -42,5 +43,11 @@ public class HomeController {
 	String createAccount(@ModelAttribute("user")User user){
 		System.out.println("create-account Action: User : "+user.toString());
 		return "create-account";
+	}
+	
+	@PostMapping("/login")
+	String login(@RequestParam("email") String email, @RequestParam("password") String password){
+		System.out.println("Login Action: email : "+email+", password : "+password);
+		return "home";
 	}
 }
