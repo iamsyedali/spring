@@ -3,9 +3,13 @@ package com.example;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.data.model.User;
 
 @Controller
 public class HomeController {
@@ -21,14 +25,15 @@ public class HomeController {
 	}
 	
 	@GetMapping("/create-account")
-	String signup(){
+	String signup(Model model){
 		System.out.println("create-account : ");
+        model.addAttribute("user", new User());
 		return "create-account";
 	}
 	
 	@PostMapping("/create-account")
-	String createAccount(){
-		System.out.println("create-account Action: ");
+	String createAccount(@ModelAttribute("user")User user){
+		System.out.println("create-account Action: User : "+user.toString());
 		return "create-account";
 	}
 }
